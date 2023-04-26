@@ -14,10 +14,12 @@ class _HomeProductListState extends State<HomeProductList> {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      crossAxisCount: 2,
-      childAspectRatio: 0.68,
+      crossAxisCount: 2, //200px    100px 100px
+      childAspectRatio: 0.68, //68px  68px  => 64px
       shrinkWrap: true,
-      children: [for (int i = 0; i < 12; i++) itemProduct()],
+      children: [
+        for (int i = 0; i < 12; i++) itemProduct(),
+      ],
     );
   }
 
@@ -74,8 +76,34 @@ class _HomeProductListState extends State<HomeProductList> {
                   color: Colors.red,
                 ),
               )
-              
             ],
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 5, top: 5),
+            alignment: Alignment.centerLeft,
+            child: TextWidget(
+                bold: false,
+                text: "Lorem Ipsum is simply dummy text ...",
+                size: 15),
+          ),
+          Container(
+            padding: const EdgeInsets.only(top: 5, left: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextWidget(
+                  text: "\$1000",
+                  size: 12,
+                  color: Colors.red,
+                ),
+                TextWidget(
+                  text: "\$1500",
+                  size: 12,
+                  color: Colors.black,
+                  decoration: true,
+                )
+              ],
+            ),
           )
         ],
       ),

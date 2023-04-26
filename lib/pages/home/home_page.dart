@@ -4,7 +4,7 @@ import 'package:flutter_ecom_ism_2023/shared/widgets/app_bar_home.dart';
 
 import '../../shared/widgets/custom_widget.dart';
 import 'widgets/home_categorie_list.dart';
-import 'widgets/home_product_list.dart';
+import '../../shared/widgets/home_product_list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         body: Center(
             child: ListView(
-      scrollDirection: Axis.vertical,
+      //scrollDirection: Axis.vertical,
       children: [
         const AppNavHome(
           label: "Ecommerce",

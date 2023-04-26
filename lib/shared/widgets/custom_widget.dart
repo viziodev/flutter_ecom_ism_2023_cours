@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 Text TextWidget(
-    {String text = "", Color? color, double size = 25, bool bold = true}) {
+    {String text = "", Color? color, double size = 25, bool bold = true,bool decoration=false}) {
   return Text(
     text,
     style: TextStyle(
       color: color ?? ecomPrymaryColor,
       fontSize: size,
       fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+      decoration:decoration? TextDecoration.lineThrough:TextDecoration.none
     ),
   );
 }

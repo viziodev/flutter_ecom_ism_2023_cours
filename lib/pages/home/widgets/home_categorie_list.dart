@@ -34,9 +34,16 @@ class _HomeListCategorieState extends State<HomeListCategorie> {
           Image.asset(
             "images/1.png",
             height: 40,
-            width:40,
+            width: 40,
           ),
-          TextWidget(text:"Categorie 1",size:16)
+          InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, "categorie");
+              },
+              child: TextWidget(
+                text: "Categorie 1",
+                size: 16,
+              ))
         ]));
   }
 }
