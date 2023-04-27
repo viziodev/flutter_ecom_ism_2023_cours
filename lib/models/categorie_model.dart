@@ -18,4 +18,7 @@ class Categorie {
 
 
   
+
+  @override
+  String toString() => 'Categorie(id: $id, libelle: $libelle, photo: $photo)';
 }

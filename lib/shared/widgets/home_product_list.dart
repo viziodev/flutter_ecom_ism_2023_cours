@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecom_ism_2023/shared/constants.dart';
 import 'package:flutter_ecom_ism_2023/shared/widgets/custom_widget.dart';
 
+import '../../models/product_model.dart';
+
 class HomeProductList extends StatefulWidget {
-  const HomeProductList({super.key});
+  final List<Product> products;
+  const HomeProductList({super.key, required this.products});
 
   @override
   State<HomeProductList> createState() => _HomeProductListState();
@@ -18,12 +21,15 @@ class _HomeProductListState extends State<HomeProductList> {
       childAspectRatio: 0.68, //68px  68px  => 64px
       shrinkWrap: true,
       children: [
-        for (int i = 0; i < 12; i++) itemProduct(),
+        for (int i = 0; i < widget.products.length; i++)
+          itemProduct(
+            product: widget.products[i],
+          ),
       ],
     );
   }
 
-  Container itemProduct() {
+  Container itemProduct({required Product product}) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
       padding: const EdgeInsets.only(left: 5, right: 2, top: 10),
@@ -38,23 +44,26 @@ class _HomeProductListState extends State<HomeProductList> {
                 Icons.favorite_border,
                 color: Colors.red,
               ),
-              Container(
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    color: ecomPrymaryColor,
-                    borderRadius: BorderRadius.circular(30)),
-                child: TextWidget(
-                  text: "saled",
-                  size: 15,
-                  color: Colors.white,
-                ),
-              )
+              if (product.saled)
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      color: ecomPrymaryColor,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: TextWidget(
+                    text: "saled",
+                    size: 15,
+                    color: Colors.white,
+                  ),
+                )
             ],
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
-            child: Image.asset("images/1.png"),
+            child: Image.asset(
+              "images/${product.image}",
+            ),
             height: 110,
             width: 110,
           ),
@@ -65,7 +74,7 @@ class _HomeProductListState extends State<HomeProductList> {
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.only(left: 10),
                 child: TextWidget(
-                  text: "Product 1",
+                  text: product.libelle,
                   size: 15,
                 ),
               ),
@@ -92,16 +101,17 @@ class _HomeProductListState extends State<HomeProductList> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextWidget(
-                  text: "\$1000",
+                  text: "\$${product.newPrice}",
                   size: 12,
                   color: Colors.red,
                 ),
-                TextWidget(
-                  text: "\$1500",
-                  size: 12,
-                  color: Colors.black,
-                  decoration: true,
-                )
+                if (product.saled)
+                  TextWidget(
+                    text: "\$${product.oldPrice}",
+                    size: 12,
+                    color: Colors.black,
+                    decoration: true,
+                  )
               ],
             ),
           )
