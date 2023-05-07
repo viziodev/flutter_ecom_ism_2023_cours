@@ -1,5 +1,3 @@
-
-
 class Product {
   final int id;
   final String libelle;
@@ -8,9 +6,9 @@ class Product {
   final String image;
   final bool saled;
   final String categorie;
-  final double qteStock;
-  final double qteComd;
-  final double montant;
+  double qteStock;
+  double qteComd;
+  double montant;
   Product({
     required this.id,
     required this.libelle,

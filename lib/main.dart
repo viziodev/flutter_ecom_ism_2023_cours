@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecom_ism_2023/pages/cart/cart_page.dart';
 import 'package:flutter_ecom_ism_2023/pages/home/home_page.dart';
 import 'package:flutter_ecom_ism_2023/pages/product_categorie/product_categorie_page.dart';
+import 'package:flutter_ecom_ism_2023/providers/cart_provider.dart';
+import 'package:flutter_ecom_ism_2023/providers/data_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (_) => EcomProvider(),
+      ),
+       ChangeNotifierProvider(
+        create: (_) => CartPovider(),
+      )
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +33,8 @@ class MyApp extends StatelessWidget {
         initialRoute: "home",
         routes: {
           "home": (context) => const HomePage(),
-         // "categorie": (context) => const ProductCatagoriePage(),
+          "cart":(context) => const CartPage(),
+          // "categorie": (context) => const ProductCatagoriePage(),
         });
   }
 }

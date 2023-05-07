@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecom_ism_2023/shared/constants.dart';
 import 'package:flutter_ecom_ism_2023/shared/widgets/custom_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/product_model.dart';
+import '../../providers/cart_provider.dart';
 
 class HomeProductList extends StatefulWidget {
   final List<Product> products;
@@ -16,6 +18,7 @@ class HomeProductList extends StatefulWidget {
 class _HomeProductListState extends State<HomeProductList> {
   @override
   Widget build(BuildContext context) {
+    final dataProvider = Provider.of<CartPovider>(context, listen: true);
     return GridView.count(
       crossAxisCount: 2, //200px    100px 100px
       childAspectRatio: 0.68, //68px  68px  => 64px
@@ -23,13 +26,15 @@ class _HomeProductListState extends State<HomeProductList> {
       children: [
         for (int i = 0; i < widget.products.length; i++)
           itemProduct(
-            product: widget.products[i],
-          ),
+              product: widget.products[i],
+              callback: () {
+                dataProvider.addCart(widget.products[i]);
+              }),
       ],
     );
   }
 
-  Container itemProduct({required Product product}) {
+  Container itemProduct({required Product product, Function? callback}) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
       padding: const EdgeInsets.only(left: 5, right: 2, top: 10),
@@ -78,11 +83,16 @@ class _HomeProductListState extends State<HomeProductList> {
                   size: 15,
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(right: 5),
-                child: Icon(
-                  CupertinoIcons.cart_badge_plus,
-                  color: Colors.red,
+              Padding(
+                padding: const EdgeInsets.only(right: 5),
+                child: InkWell(
+                  onTap: () {
+                    callback!();
+                  },
+                  child: const Icon(
+                    CupertinoIcons.cart_badge_plus,
+                    color: Colors.red,
+                  ),
                 ),
               )
             ],

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecom_ism_2023/shared/constants.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:provider/provider.dart';
+import '../../models/product_model.dart';
+import '../../providers/cart_provider.dart';
 import 'custom_widget.dart';
 
 class AppNavHome extends StatefulWidget {
@@ -21,6 +24,7 @@ class AppNavHome extends StatefulWidget {
 class _AppNavHomeState extends State<AppNavHome> {
   @override
   Widget build(BuildContext context) {
+    final dataProvider = Provider.of<CartPovider>(context, listen: true);
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.all(25),
@@ -55,7 +59,7 @@ class _AppNavHomeState extends State<AppNavHome> {
           if (widget.iconCart)
             badges.Badge(
               badgeContent: TextWidget(
-                text: "5",
+                text: "${dataProvider.cart.productList.length}",
                 color: Colors.white,
                 size: 15,
               ),
@@ -66,7 +70,7 @@ class _AppNavHomeState extends State<AppNavHome> {
               ),
               child: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, "categorie");
+                  Navigator.pushNamed(context, "cart");
                 },
                 child: Icon(
                   Icons.shopping_bag_outlined,
